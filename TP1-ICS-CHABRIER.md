@@ -193,4 +193,28 @@ Le système nous retourne la localisation : "/var/log/apt/history.log"
 Pour créer le fichier : `touch fichier` puis `locate fichier` pour le localiser.
 Effectivement, rien n'apparaît quand on tente de le localiser. Cela vient du fait que la commande "locate" utilise une base de données pour retrouver l'emplacement. Cette base de données se rafraîchissant seulement toutes les 24h, le fichier créé à l'instant n'est pas connu. Il faut utiliser `updatedb` pour mettre à jour la base de données et pour voir que la commande `locate fichier` est désormais fonctionnelle.
 
-## Exercice 2. Découverte de l’éditeur de texte nano
+## Exercice 3. Découverte de l’éditeur de texte nano
+
+<span style='color:red'>1.</span> Copiez le fichier /var/log/syslog dans votre dossier personnel sous le nom log.txt, puis ouvrez-le avec nano
+
+Pour copier le fichier : `sudo cp /var/log/syslog ~/log.txt`
+Pour l'ouvrir avec nano : `nano ~/log.txt`
+Pour tout faire en une seule commande : `sudo cp /var/log/syslog ~/log.txt && nano ~/log.txt`
+
+<span style='color:red'>2.</span> Remplacez toutes les occurrences du mot kernel par le mot noyau
+
+Pour remplacer avec nano : Entrer `CTRL + W` puis `CTRL + R`,taper ensuite le mot à remplacer (donc ici kernek), et pour finir taper le mot qui remplacera l'ancien (donc ici noyau)
+
+<span style='color:red'>3.</span> Déplacer les 10 premières lignes à la fin du fichier
+
+- Pour sélectionner les 10 lignes : `CTRL + ^` et se déplacer avec les flèches pour surligner les 10 lignes
+- Faire un `CTRL + K` pour couper et descendre à la fin du fichier pour faire un `CTRL + U` pour coller.
+
+<span style='color:red'>4.</span> Annulez cette action
+
+Pour annuler, il suffit tout simplement de faire un `ALT + U`
+
+<span style='color:red'>5.</span> Enregistrez le fichier avant de quitter nano
+
+- Pour enregistrer le fichier : `CTRL + S`
+- Pour quitter nano : `CTRL + X`
