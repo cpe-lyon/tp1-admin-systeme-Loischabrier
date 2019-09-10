@@ -122,3 +122,75 @@ Contrairement à la question du dessus, en utilisant 2 ">", au lieu de remplacer
 <span style='color:red'>10.</span> A quoi sert la commande file? Essayez la sur des fichiers de types différents
 
 Elle permet de déterminer le type d'un fichier.
+
+<span style='color:red'>11.</span> Créez un fichier toto qui contient la chaîne Hello Toto ! ; créer ensuite un lien titi vers ce fichier
+avec la commande ln toto titi. 
+Modifiez à présent le contenu de toto et affichez le contenu de titi :
+qu’observe-t-on ? Supprimez le fichier toto ; quelle conséquence cela a-t-il sur titi ?
+
+Il faut tout d'abord exécuter la commande `echo 'Hello Toto !' > toto`. Ensuite, exécuter `ln toto titi` puis exécuter `echo 'Hello Toto2 !' > toto` pour changer le contenu du fichier "toto". Ensuite, en affichant le contenu du fichier "titi", on se rend compte qu'il est lié au fichier "toto" et que lorsqu'on modifie ce dernier, le fichier "titi" est modifié également.
+Lorsqu'on supprime le fichier "toto", cela ne supprime pas le fichier "titi".
+
+
+<span style='color:red'>12.</span> Créez à présent un lien symbolique tutu sur titi avec la commande ln -s titi tutu. Modifiez le contenu de titi ; quelle conséquence pour tutu ? Et inversement ? Supprimez le fichier titi ; quelle
+conséquence cela a-t-il sur tutu ?
+
+Lorsque l'on modifie le contenu de "titi", le contenu de "tutu" change également. En revanche, lorsque l'on supprime "titi", "tutu" est également supprimé.
+Cela signifie qu'en rajoutant le `-s` pour créer le lien symbolique entre les 2 fichiers, ces derniers sont liés également pour la suppression.
+
+<span style='color:red'>13.</span> Affichez à l’écran le fichier /var/log/syslog. Quels raccourcis clavier permettent d’interrompre et reprendre le défilement à l’écran ?
+
+Pour afficher le fichier /var/log/syslog/, il suffit d'exécuter la commande `cat /var/log/syslog`.
+Pour naviguer librement dans le fichier, il faut rajouter "less" comme ceci : `cat /var/log/syslog | less`
+
+<span style='color:red'>14.</span> Affichez les 5 premières lignes du fichier /var/log/syslog, puis les 15 dernières, puis seulement les lignes 10 à 20.
+
+ - 5 premières : `head -5 /var/log/syslog`
+ - 15 dernières : `tail -15 /var/log/syslog`
+ - Lignes 10 à 20 : `perl -ne'10..20 and print' /var/log/syslog`
+
+<span style='color:red'>15.</span> Que fait la commande dmesg | less ?
+
+La commande `dmesg` permet de voir l'historique des messages du noyaux. La commande `less` permet quant à elle de naviguer dans le fichier librement.
+
+<span style='color:red'>16.</span> Affichez à l’écran le fichier /etc/passwd ; que contient-il ? Quelle commande permet d’afficher la page de manuel de ce fichier ?
+
+Le fichier `/etc/passwd` contient toutes les informations relatives aux utilisateurs (login, mots de passe, etc).
+La commande permettant l'affichage de la page de manuel de ce fichier est `man passwd` pour afficher la première page du manuel et `man <numéro page> passwd` pour afficher une page en particulier.
+
+<span style='color:red'>17.</span> Affichez seulement la première colonne triée par ordre alphabétique inverse
+
+Pour se faire, il faut exécuter la commande `sort -r +0 /etc/passwd` où `sort` permet de trier les colonnes, `-r` permet de trier dans l'ordre alphabétique inverse et ou `+0` signifie que l'on veut seulement garder la première colonne.
+
+<span style='color:red'>18.</span>  Quelle commande nous donne le nombre d’utilisateurs ?
+
+1 utilisateur = 1 ligne, donc on compte le nombre de lignes avec `wc -l /etc/passwd` ce qui nous donne 31 lignes donc 31 utilisateurs.
+
+<span style='color:red'>19.</span> Combien de pages de manuel comportent le mot-clé conversion dans leur description ?
+
+
+<span style='color:red'>20.</span> A l’aide de la commande find, recherchez tous les fichiers se nommant passwd présents sur la machine
+
+Pour rechercher tous les fichiers se nommant "passwd" dans le système, il suffit d'entrer la commande `find -name 'passwd'`.
+
+<span style='color:red'>21.</span> Modifiez la commande précédente pour que la liste des fichiers trouvés soit enregistrée dans le fichier
+~/list_passwd_files.txt et que les erreurs soient redirigées vers le fichier spécial /dev/null
+
+Pour stocker le retour de la commande find dans "~/list_passwd_files.txt" et que les erreurs soient envoyés sur "/dev/null", il faut utiliser la commande `find / -name 'passwd' > ~/list_passwd_files.txt 2>/dev/null`.
+Le "2" devant ">" permet de préciser que ce sont les erreurs qyu doivent être envoyées dans "/dev/null".
+
+<span style='color:red'>22.</span> Dans votre dossier personnel, utilisez la commande grep pour chercher où est défini l’alias ll vu précédemment
+
+
+
+<span style='color:red'>23.</span> Utilisez la commande locate pour trouver le fichier history.log.
+
+Pour se faire, exécuter la commande `locate history.log`.
+Le système nous retourne la localisation : "/var/log/apt/history.log"
+
+<span style='color:red'>24.</span> Créer un fichier dans votre dossier personnel puis utilisez locate pour le trouver. Apparaît-il ? Pourquoi ?
+
+Pour créer le fichier : `touch fichier` puis `locate fichier` pour le localiser.
+Effectivement, rien n'apparaît quand on tente de le localiser. Cela vient du fait que la commande "locate" utilise une base de données pour retrouver l'emplacement. Cette base de données se rafraîchissant seulement toutes les 24h, le fichier créé à l'instant n'est pas connu. Il faut utiliser `updatedb` pour mettre à jour la base de données et pour voir que la commande `locate fichier` est désormais fonctionnelle.
+
+## Exercice 2. Découverte de l’éditeur de texte nano
